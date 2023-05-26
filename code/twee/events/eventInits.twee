@@ -1,0 +1,55 @@
+:: libraryEvents
+    <<include "maeveLib">>
+    <<include "elenaLib">>
+    <<include "amelieLib">>
+    <<include "zhiLib">>
+    <<include "vivLib">>
+    <<include "aabriaLib">>
+
+:: debateEvents
+    <<include "maeveDeb">>
+    <<include "elenaDeb">>
+    <<include "amelieDeb">>
+    <<include "zhiDeb">>
+    <<include "vivDeb">>
+    <<include "aabriaDeb">>
+
+:: adventureEvents
+    <<include "maeveAdv">>
+    <<include "elenaAdv">>
+    <<include "amelieAdv">>
+    <<include "zhiAdv">>
+    <<include "vivAdv">>
+    <<include "aabriaAdv">>
+
+:: politicsEvents
+    <<include "maevePol">>
+    <<include "elenaPol">>
+    <<include "ameliePol">>
+    <<include "zhiPol">>
+    <<include "vivPol">>
+    <<include "aabriaPol">>
+
+:: workshopEvents
+    <<include "maeveWork">>
+    <<include "elenaWork">>
+    <<include "amelieWork">>
+    <<include "zhiWork">>
+    <<include "vivWork">>
+    <<include "aabriaWork">>
+
+:: familiarEvents
+    <<include "maeveFam">>
+    <<include "elenaFam">>
+    <<include "amelieFam">>
+    <<include "zhiFam">>
+    <<include "vivFam">>
+    <<include "aabriaFam">>
+
+:: summonEvents
+    <<include "maeveSum">>
+    <<include "elenaSum">>
+    <<include "amelieSum">>
+    <<include "zhiSum">>
+    <<include "vivSum">>
+    <<include "aabriaSum">>

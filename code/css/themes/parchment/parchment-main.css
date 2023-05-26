@@ -1,0 +1,83 @@
+html.parchment body {
+	background-color: #351a07; /* Default bg color */
+    font-family: Georgia;
+}
+html.parchment #passages { /* The part of the main window that contains text */
+	border: none;
+	color: #250000;
+    background-color: tan;
+	padding: 1.2em;
+    box-shadow: 5px 5px 10px #000000, 0px 0px 15px 15px #c9a26f80 inset;
+}
+html.parchment a {
+	color: mediumblue
+}
+html.parchment #passages secret {
+	color: ghostwhite;
+}
+html.parchment title {
+	font-size: 110%;
+	display: block;
+	width: fit-content;
+	padding-left: 0.6em;
+	padding-right: 0.6em;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	text-align: center;
+	text-transform: uppercase;
+	color: ghostwhite;
+	background-color: #351a07;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment title a {
+	color: ghostwhite;
+}
+html.parchment .cols {
+	column-count: 2;
+}
+html.parchment #displayArea {
+	display: block;
+	margin-top: 1.2em;
+	padding-top: 1.2em;
+	padding-left: 3em;
+	padding-right: 3em;
+	padding-bottom: 1.2em;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment .message {
+	display: block;
+	margin-top: 1.2em;
+	padding-top: 1.2em;
+	padding-left: 3em;
+	padding-right: 3em;
+	padding-bottom: 1.2em;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment #displayArea.hidden {
+	display: none;
+}
+
+html.parchment span.color-red {
+	color: #CC0000;
+}
+html.parchment span.color-yellow {
+	color: #F7E65F;
+}
+html.parchment span.color-green {
+	color: #117B1A;
+}
+html.parchment span.color-blue {
+	color: #0055CC;
+}
+html.parchment span.color-purple {
+	color: #7330BB;
+}
+html.parchment span.color-pink {
+	color: #D238D2;
+}
+html.parchment span.color-silver {
+	color: #7c7c8a;
+}
+html.parchment span.color-gray {
+	color: #444D57;
+}

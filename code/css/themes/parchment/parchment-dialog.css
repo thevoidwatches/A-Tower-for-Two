@@ -1,0 +1,113 @@
+html.parchment #ui-dialog {
+	z-index: 100100;
+	position: fixed;
+	top: 50px;
+	margin: 0;
+	padding: 0;
+    color: #250000;
+    background-color: tan;
+    border: none;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment #ui-dialog-body {
+    color: #250000;
+    background-color: tan;
+}
+html.parchment #ui-dialog-titlebar {
+	position: relative;
+    color: ghostwhite;
+    background-color: #351a07;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment #ui-dialog-body.restart{
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment #ui-dialog-body.restart li {
+    background-color: transparent;
+    box-shadow:none;
+}
+html.parchment #ui-dialog-body.restart li:not(:first-child) {
+    border: none;
+}
+html.parchment #ui-dialog-body.restart li:last-child {
+    box-shadow:none;
+}
+html.parchment #ui-dialog-body.saves {
+    border: none;
+    overflow:hidden;
+    background-color: tan;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment #ui-dialog-body.saves li {
+    background-color: transparent;
+    box-shadow:none;
+}
+html.parchment #ui-dialog-body.saves li:not(:first-child) {
+    border: none;
+}
+html.parchment #ui-dialog-body.saves li:last-child {
+    border-radius: none;
+    box-shadow:none;
+}
+html.parchment #ui-dialog-body ul {
+    border: none;
+    color: #250000;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment #ui-dialog-body ul.buttons {
+    box-shadow: none;
+}
+html.parchment #ui-dialog-body li {
+    color: #250000;
+}
+html.parchment #ui-dialog-body li:not(:first-child) {
+    border: none;
+}
+html.parchment #ui-dialog-body.list li a {
+    color:#250000;
+}
+html.parchment #ui-dialog-body.list li a:hover {
+    background-color: saddlebrown;
+    color: ghostwhite;
+    border: none;
+}
+html.parchment #ui-dialog-close {
+	cursor: pointer;
+	font-size: 120%;
+	margin: 0.15em;
+    margin-right: .75em;
+	padding: 0;
+    width: 3em;
+	height: 80%;
+    border-radius: 0px;
+	background-color: transparent;
+	border: none;
+	transition-duration: 200ms;
+    box-shadow: none
+}
+html.parchment #ui-dialog-close:hover {
+    background-color: ghostwhite;
+    color: #351a07;
+    box-shadow: 3px 4px 5px #000000A0;
+}
+html.parchment #ui-dialog-body.settings button[id|="setting-control"] {
+    color: #250000;
+    border: none;
+    box-shadow: 3px 4px 5px #000000A0;
+}
+html.parchment #ui-dialog-body.settings button[id|="setting-control"]:hover {
+    color: ghostwhite;
+    background-color: #351a07;
+    border: inherit;
+}
+html.parchment #ui-dialog-body.settings button[id|="setting-control"].enabled {
+    color: ghostwhite;
+    background-color: #351a07;
+}
+html.parchment #ui-dialog-body.settings button[id|="setting-control"].enabled:hover {
+    background-color: #351a07;
+}
+html.parchment #notify {
+    color : #250000;
+    box-shadow: 3px 4px 5px #000000A0;
+}

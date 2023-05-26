@@ -1,0 +1,172 @@
+:: achieveInit
+    <<set $achieves = {
+        charGall : {
+            id : "charGall",
+            title : "Character Gallery Complete",
+            desc : "Whether it took you one game or many, you've met all 6 of the love interests! Which one is your favorite?",
+            completion : 6,
+            tags: ["Completion", "Characters"],
+            date : null,
+            test : "($met.maeve and $met.elena and $met.amelie and $met.zhi and $met.viv and $met.aabria)"
+        },
+        /* This one should have its description incremented each release, with a completion value equal to the total number of scenes. Give it a special tag to let it overwrite itself. */
+        sceneGall : {
+                id : "sceneGall",
+                title : "Event Gallery Complete: v0.1.0",
+                desc: "You've seen all the gallery scenes available in the v0.1.0 release! Don't worry, more will come...",
+                completion : 0, /* This gets changed after the gallery is calculated */
+                tags: ["Content", "Completion"],
+                date : null,
+                test : "($sceneGall.seen is $sceneGall.total)",
+                overwrite : true
+            },
+        /* This one similarly gets overwritten, but its completion value never changes.*/
+            completionist: {
+                id : "completionist",
+                title : "Completionist: v0.1.0",
+                desc : "You've gotten all the achievements available in the v0.1.0 release. Such dedication!",
+                completion : 1,
+                tags: ["Completion"],
+                date : null,
+                test : "($achieveGall.earned is ($achieveGall.total - 1))",
+                overwrite : true
+            }
+    }>>
+
+:: achieveGall [gameBanner]
+    <center>  <title> <<back [[Return|$return]]>></title> 
+    <br>
+    <<if $achieveGall.earned is $achieveGall.total>>
+        You have earned all possible achievements in this version! Congratulations, 100 percenter!
+    <<elseif $achieveGall.earned>>
+        You currently have a <<print Math.round(($achieveGall.earned/$achieveGall.total) * 100)>>% completion rate. Keep playing to find more achievements!
+    <<else>>
+        You haven't earned any of the <<print Object.keys($achieves).length + 1>> achievements yet. Keep looking!
+    <</if>> </center>
+    
+    <<if $achieveGall.earned>> <br>
+        /* prepare the achieves arry */
+            <<set _earnedAchieves to Object.values($achieveGall)>>
+            <<run _earnedAchieves.delete($achieveGall.total)>>
+            <<run _earnedAchieves.delete($achieveGall.earned)>>
+
+        /* count through achieves to get currently-present tags */
+            <<set _tags to []>>
+            <<for _a range _earnedAchieves>>
+                <<for _tag range _a.tags >>
+                    <<run _tags.pushUnique(_tag)>>
+                <</for>>
+            <</for>>
+            <<run _tags.sort()>>
+
+        <center>
+        <<iconcheck "_sort" "You are currently sorting by date earned. Sort alphabetically instead?" "You are currently sorting alphabetically. Sort by date earned instead?">> <</iconcheck>> <br>
+            /* Sort by Date: 
+                <<run _earnedAchieves.sort((a, b) => (a.date > b.date) ? 1: -1)>>
+            or by name:
+                <<run _earnedAchieves.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1: -1)>> */
+        <<button "Hide Achievements">>
+            <<addclass "#displayArea" "hidden">>
+        <</button>>
+        <<indent 0.5>>
+        <<button "See All Achievements">>
+            <<if _sort>>
+                <<run _earnedAchieves.sort((a, b) => (a.date > b.date) ? 1: -1)>>
+            <<else>>
+                <<run _earnedAchieves.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1: -1)>>
+            <</if>>
+            <<set _tagReq to false>>
+            <<removeclass "#displayArea" "hidden">>
+            <<replace "#displayArea">>
+                <<include "achieveLoop">>
+            <</replace>>
+        <</button>>
+        <br>
+        Filter by Tag:
+        <<indent 0.5>>
+        <<listbox "_tagReq">>
+            <<option "Any" false selected>>
+            <<optionsfrom _tags>>
+        <</listbox>> <br>
+        <<button "Apply Filters">>
+            <<if _sort>>
+                <<run _earnedAchieves.sort((a, b) => (a.date > b.date) ? 1: -1)>>
+            <<else>>
+                <<run _earnedAchieves.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1: -1)>>
+            <</if>>
+            <<set _count to _earnedAchieves.countWith(function (test) { return (_tagReq is false || test.tags.includes(_tagReq)); })>>
+            <<removeclass "#displayArea" "hidden">>
+            <<replace "#displayArea">>
+                <<if _count lt _earnedAchieves.length>>
+                    <center>
+                        Filtered out _count achievement<<if _count gt 1>>s<</if>>.
+                    </center> <br>
+                <</if>>
+                <<include "achieveLoop">>
+            <</replace>>
+        <</button>> </center>
+    <</if>>
+
+    <span id="displayArea" class="hidden"> </span>
+
+
+:: achieveLoop
+    <<set _months to ["January", "February", "March", "April", "May", "June", "July", "August", "September", "November", "December"]>>
+    <<for _a range _earnedAchieves>>
+        <<capture _a>>
+            <<if !_tagReq or _a.tags.includes(_tagReq)>>
+                <<set _title to "<center> ''" + _a.title + "'' </center>">>
+                <<set _m to _a.date.getMonth() - 1>>
+                <<set _d to _a.date.getDate()>>
+                <<set _d to numberToWords.toOrdinal(_d)>>
+                <<set _y to _a.date.getFullYear()>>
+                <<message _title>> <span class="message">
+                    <<indent>> _a.desc <br>
+                    <<indent>> //Tags: _a.tags// <br>
+                    <<indent>> //Earned on _months[_m]  _d, _y (_m/<<print _a.date.getDate()>>/_y) //
+                </span> <</message>> <br>
+            <</if>>
+        <</capture>>
+    <</for>>
+
+:: achieveTest
+    <<set _achieves to Object.values($achieves)>>
+
+    /* counts through every member of $achieves and tests to see if a) it's already in $achieveGall, and b) if its condition is true. If so, it adds that achievement to $achieveGall and appends to an announcement test that will go in an alert at the end. $achieves will remove all earned achievements at the end, so that it will run quicker as there are fewer to check. */
+    <<set _earned to 0>>
+    <<set _announce to "">>
+    <<set _adds to []>>
+
+    <<for _a range $achieves>>
+        <<capture _a>>
+            <<if _a.overwrite or !(_a.id in $achieveGall)>>
+                <<if _a.overwrite>>
+                    <<set _verTest to " and (!$achieveGall." + _a.id + " or !(_a.title is $achieveGall." + _a.id + ".title))">>
+                <<else>>
+                    <<set _verTest to "">>
+                <</if>>
+                <<set _code to "<<if " + _a.test + _verTest + ">> <<run _adds.push(_a)>> <</if>>">>
+                _code
+            <</if>>
+        <</capture>>
+    <</for>>
+
+    <<for _a range _adds>>
+        <<capture _a>>
+            <<set _a.date to new Date()>>
+            <<set $achieveGall.earned += _a.completion>>
+            <<set _code to "<<set $achieveGall." + _a.id + " to _a>>">>
+            _code
+            <<set _announce += (", " + _a.title)>>
+            <<set _earned += 1>>
+        <</capture>>
+    <</for>>
+
+    <<if _earned is 1>>
+        <<set _announce to "You've earned an achievement" + _announce + "! Check out the Achievements page for more details.">>
+        <<notify>> _announce <</notify>>
+    <<elseif _earned gt 1>>
+        <<set _announce to "You've earned the following achievements: //" + _announce.slice(1) + "!// Check out the Achievements page for more details.">>
+        <<notify>> _announce <</notify>>
+    <</if>>
+    <<run memorize("achieveGall", $achieveGall)>>

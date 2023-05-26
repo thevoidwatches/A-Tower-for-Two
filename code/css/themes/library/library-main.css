@@ -1,0 +1,80 @@
+html.library body {
+	background-color: #003200; /* Default bg color */
+    font-family: Georgia;
+}
+html.library #passages { /* The part of the main window that contains text */
+	border: none;
+	color: #002500;
+    background-color: ghostwhite;
+	padding: 1.2em;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library #passages secret {
+	color: ghostwhite;
+}
+html.library title {
+	font-size: 110%;
+	display: block;
+	width: fit-content;
+	padding-left: 0.6em;
+	padding-right: 0.6em;
+	padding-top: 0.25em;
+	padding-bottom: 0.25em;
+	text-align: center;
+	text-transform: uppercase;
+	color: ghostwhite;
+	background-color: darkgreen;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library title a {
+	color: ghostwhite;
+}
+html.library .cols {
+	column-count: 2;
+}
+html.library #displayArea {
+	display: block;
+	margin-top: 1.2em;
+	padding-top: 1.2em;
+	padding-left: 3em;
+	padding-right: 3em;
+	padding-bottom: 1.2em;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library .message {
+	display: block;
+	margin-top: 1.2em;
+	padding-top: 1.2em;
+	padding-left: 3em;
+	padding-right: 3em;
+	padding-bottom: 1.2em;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library #displayArea.hidden {
+	display: none;
+}
+
+html.library span.color-red {
+	color: #CC0000;
+}
+html.library span.color-yellow {
+	color: #DDB700;
+}
+html.library span.color-green {
+	color: #1E9227;
+}
+html.library span.color-blue {
+	color: #0055CC;
+}
+html.library span.color-purple {
+	color: #7330BB;
+}
+html.library span.color-pink {
+	color: #DD72DD;
+}
+html.library span.color-silver {
+	color: #708088;
+}
+html.library span.color-gray {
+	color: #4F5F5F;
+}

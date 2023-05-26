@@ -1,0 +1,107 @@
+html.digsite body {
+	color: #f5f1e7; /* Default text color */
+	background-color: #051435; /* Default bg color */
+    font-family: Georgia;
+}
+html.digsite #passages { /* The part of the main window that contains text */
+	border: none;
+	border-radius: 50px;
+    background-color: #000e29;
+	padding: 1.2em;
+    box-shadow: 4px 6px 8px #000000 inset, -5px -5px 10px #00000035, 5px 5px 10px #ffffff15;
+}
+html.digsite #passages secret {
+	color: #000e29;
+}
+html.digsite title {
+	font-size: 125%;
+	display: block;
+	width: fit-content;
+	padding-left: 1em;
+	padding-right: 1em;
+	text-align: center;
+	color: #f5f1e7;
+	background-color: #051435;
+	border-radius: 50px;
+    box-shadow: -4px -6px 8px #00000080 inset, 5px 5px 10px #00000035, 5px 5px 10px #ffffff15 inset;
+    font-family: "Copperplate Gothic";
+}
+html.digsite title a {
+	color: inherit !important;
+}
+html.digsite img {
+	border-radius: 50px;
+	box-shadow: 4px 6px 8px #ffffff40, -4px -6px 8px #00000080;
+}
+html.digsite h3 {
+	font-size: 135%;
+	text-align: center;
+}
+html.digsite #displayArea {
+	display: block;
+	margin-top: 1.2em;
+	padding-top: 1.2em;
+	padding-left: 3em;
+	padding-right: 3em;
+	padding-bottom: 1.2em;
+	border-radius: 50px;
+    background-color: #000818;
+    box-shadow: 4px 6px 8px #000000 inset, -5px -5px 10px #00000035, 5px 5px 10px #ffffff15;
+}
+html.digsite #displayArea.hidden {
+	display: none;
+}
+html.digsite .message {
+	display: block;
+	margin-top: 1.2em;
+	padding-top: 1.2em;
+	padding-left: 3em;
+	padding-right: 3em;
+	padding-bottom: 1.2em;
+	border-radius: 50px;
+    background-color: #000818;
+    box-shadow: 4px 6px 8px #000000 inset, -5px -5px 10px #00000035, 5px 5px 10px #ffffff15;
+}
+html.digsite .message .message {
+	background-color: #000410;
+}
+html.digsite .message .message .message {
+	background-color: #000205;
+}
+html.digsite .message .message .message .message {
+	background-color: black;
+}
+html.digsite #displayArea .message {
+	background-color: #000410;
+}
+html.digsite #displayArea .message .message {
+	background-color: #000205;
+}
+html.digsite #displayArea .message .message .message {
+	background-color: black;
+}
+
+html.digsite span.color-red {
+	color: #EC140C;
+}
+html.digsite span.color-yellow {
+	color: #e2c234;
+}
+html.digsite span.color-green {
+	color: #3EB227;
+}
+html.digsite span.color-blue {
+	color: #00BBFF;
+}
+html.digsite span.color-purple {
+	color: #a270db;
+}
+html.digsite span.color-pink {
+	color: #EE82EE;
+}
+html.digsite span.color-silver {
+	color: #b3bbbe;
+}
+html.digsite span.color-gray {
+	color: #87867f;
+}

@@ -1,0 +1,113 @@
+html.library #ui-dialog {
+	z-index: 100100;
+	position: fixed;
+	top: 50px;
+	margin: 0;
+	padding: 0;
+    color: #002500;
+    background-color: ghostwhite;
+    border: none;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library #ui-dialog-body {
+    color: #002500;
+    background-color: ghostwhite;
+}
+html.library #ui-dialog-titlebar {
+	position: relative;
+    color: ghostwhite;
+    background-color: darkgreen;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library #ui-dialog-body.restart{
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library #ui-dialog-body.restart li {
+    background-color: transparent;
+    box-shadow:none;
+}
+html.library #ui-dialog-body.restart li:not(:first-child) {
+    border: none;
+}
+html.library #ui-dialog-body.restart li:last-child {
+    box-shadow:none;
+}
+html.library #ui-dialog-body.saves {
+    border: none;
+    overflow:hidden;
+    background-color: ghostwhite;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library #ui-dialog-body.saves li {
+    background-color: transparent;
+    box-shadow:none;
+}
+html.library #ui-dialog-body.saves li:not(:first-child) {
+    border: none;
+}
+html.library #ui-dialog-body.saves li:last-child {
+    border-radius: none;
+    box-shadow:none;
+}
+html.library #ui-dialog-body ul {
+    border: none;
+    color: #002500;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.library #ui-dialog-body ul.buttons {
+    box-shadow: none;
+}
+html.library #ui-dialog-body li {
+    color: #002500;
+}
+html.library #ui-dialog-body li:not(:first-child) {
+    border: none;
+}
+html.library #ui-dialog-body.list li a {
+    color:#002500;
+}
+html.library #ui-dialog-body.list li a:hover {
+    background-color: green;
+    color: ghostwhite;
+    border: none;
+}
+html.library #ui-dialog-close {
+	cursor: pointer;
+	font-size: 120%;
+	margin: 0.15em;
+    margin-right: .75em;
+	padding: 0;
+    width: 3em;
+	height: 80%;
+    border-radius: 0px;
+	background-color: transparent;
+	border: none;
+	transition-duration: 200ms;
+    box-shadow: none
+}
+html.library #ui-dialog-close:hover {
+    background-color: ghostwhite;
+    color: darkgreen;
+    box-shadow: 3px 4px 5px #000000A0;
+}
+html.library #ui-dialog-body.settings button[id|="setting-control"] {
+    color: #002500;
+    border: none;
+    box-shadow: 3px 4px 5px #000000A0;
+}
+html.library #ui-dialog-body.settings button[id|="setting-control"]:hover {
+    color: ghostwhite;
+    background-color: green;
+    border: inherit;
+}
+html.library #ui-dialog-body.settings button[id|="setting-control"].enabled {
+    color: ghostwhite;
+    background-color: darkgreen;
+}
+html.library #ui-dialog-body.settings button[id|="setting-control"].enabled:hover {
+    background-color: green;
+}
+html.library #notify {
+    color : #002500;
+    box-shadow: 3px 4px 5px #000000A0;
+}

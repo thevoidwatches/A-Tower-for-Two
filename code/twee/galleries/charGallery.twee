@@ -1,0 +1,61 @@
+:: charGall [gameBanner]
+    <center>
+    <title> <<back [[Return|$return]]>> </title>
+    
+    /* Gets the array ready. */
+        /* Creates an object that's a little descriptive passage for each character, along with their first name and last name, and a tag for if they're futa and for if they're a student or a professor. */
+        <<set _gall to Object.values($npc)>>
+    /* there will then be buttons to display a) all characters, b) all futas, c) all femmes, d) all students, e) all professors */
+        <div class="cols">
+            <<button "Hide Characters">>
+                <<replace "#displayArea">> <</replace>>
+                <<addclass "#displayArea" "hidden">>
+            <</button>>
+            <br>
+            <<button "See All Characters">>
+                <<if $sort>>
+                    <<run _gall.sort((a, b) => (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : -1)>>
+                <<else>>
+                    <<run _gall.sort((a, b) => (a.surname.toLowerCase() > b.surname.toLowerCase()) ? 1 : -1)>>
+                <</if>>
+                <<replace "#displayArea">>
+                    <<include "npcGallLoop">>
+                <</replace>>
+                <<removeclass "#displayArea" "hidden">>
+            <</button>>
+        </div>
+        <<iconcheck "$sort" "Currently sorting by first name. Sort by surname?" "Currently sorting by surname. Sort by first name?">> <</iconcheck>> <br> <br>
+    </center>
+    /* finally, an <span> which the buttons will <<replace>> with the contents of npcGallLoop, setting the correct variables to ensure that the loop (which travels through one of the two arrays) will print the correct set. By default it'll show all characters you've seen. */
+    <span id="displayArea" class="hidden"> </span>
+
+    /* The actual gallery will work similarly, but just has things in <<messages>> */
+
+:: npcGallLoop
+    <div class="cols">
+    <<for _char range _gall>>
+        <<capture _char>>
+        <<if ($debug or _char.met)>>
+            <<set _fName to "<center>''" + _char.name + " " + _char.surname + "''</center>">>
+            <<link _fName>>
+                <<if settings.images>>
+                    <<addclass "#displayArea" "cols">>
+                <<else>>
+                    <<removeclass "#displayArea" "cols">>
+                <</if>>
+                <<replace "#displayArea">>
+                    <div class="break">
+                        <center> <title> _char.name _char.surname </title> </center> <br>
+
+                        <<indent>> _char.desc <br>
+                    </div>
+                    <<set _char.image to "<<img \"" + _char.display + "\" >> " + _char.altDisplay + " <</img>>">>
+                    <center> _char.image </center>
+                <</replace>>
+            <</link>>
+        <<elseif !_char.met>>
+            <center> //You haven't met this character yet.// </center>  
+        <</if>>
+        <</capture>>
+    <</for>>
+    </div>

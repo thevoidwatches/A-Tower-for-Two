@@ -1,0 +1,45 @@
+html.library button { /* <<button>> elements */
+	cursor: pointer;
+	color: ghostwhite;
+	background-color: darkgreen;
+	border: none;
+	line-height: normal;
+	padding: 0.6em;
+    margin: 0.15em;
+	transition-duration: 200ms;
+	user-select: none;
+    box-shadow: 3px 4px 5px #000000A0;
+}
+html.library button:hover {
+	background-color: green;
+	border: none;
+}
+html.library button:disabled {
+    color: ghostwhite;
+    border: none;
+    background-color: gray;
+}
+html.library .macro-radiobutton {
+    box-shadow: 2px 2px 3px #00000080 !important;
+}
+html.library input, html.library select, html.library textarea {
+	color: ghostwhite;
+	background-color: darkgreen;
+	border: none;
+	padding: 0.3em;
+	margin: 0.1em;
+    box-shadow: 3px 4px 5px #000000;
+}
+html.library input, html.library select, html.library textarea:focus {
+	color: ghostwhite;
+	background-color: darkgreen;
+	border: none;
+	padding: 0.3em;
+	margin: 0.1em;
+    box-shadow: 3px 4px 5px #000000A0;
+}
+html.library input:not(:disabled):focus,html.library  select:not(:disabled):focus,html.library  textarea:not(:disabled):focus,
+html.library input:not(:disabled):hover,html.library  select:not(:disabled):hover,html.library  textarea:not(:disabled):hover {
+	border: none;
+    box-shadow: 3px 4px 5px #000000A0;
+}

@@ -1,0 +1,88 @@
+:: sceneGall [gameBanner]
+    <center>  <title> <<back [[Return|$return]]>> </title> 
+    <br>
+    <<if $sceneGall.seen is $sceneGall.total>>
+        You have found all $sceneGall.total gallery scenes!
+    <<elseif $sceneGall.unlocked>>
+        You have only found $sceneGall.seen/$sceneGall.total gallery scenes, but have temporarily unlocked all of them.
+    <<elseif $sceneGall.seen>>
+        You have found $sceneGall.seen/$sceneGall.total gallery scenes!
+    <<else>>
+        You haven't found any of the $sceneGall.total gallery scenes yet. Keep looking!
+    <</if>> </center>
+    
+    <<if $sceneGall.seen or $sceneGall.unlocked>>
+        /* Sort the gallery to display scenes in order of title rather than order of aquisition */
+            <<set _gall to Object.values($sceneGall)>>
+            <<run _gall.delete($sceneGall.total)>>
+            <<run _gall.delete($sceneGall.seen)>>
+            <<run _gall.delete($sceneGall.return)>>
+            <<run _gall.delete(true)>>
+            <<run _gall.sort((a, b) => (a.title.toLowerCase() > b.title.toLowerCase()) ? 1: -1)>>
+        /* Also, count through the gallery to get currently-present characters and fetishes */
+            <<set _chars to []>>
+            <<for _scene range _gall>>
+                <<if !Number.isInteger(_scene) and !(typeof _scene is "string")>>
+                    <<for _char range _scene.chars >>
+                        <<run _chars.pushUnique(_char)>>
+                    <</for>>
+                <</if>>
+            <</for>>
+            <<run _chars.sort()>>
+
+        <center>
+        <<button "Hide Scenes">>
+            <<addclass "#displayArea" "hidden">>
+        <</button>>
+        <<indent 0.5>>
+        <<button "See All Scenes">>
+            <<set _charReq to false>>
+            <<set _fetishReq to false>>
+            <<set _phaseReq to false>>
+            <<removeclass "#displayArea" "hidden">>
+            <<replace "#displayArea">>
+                <<include "gallLoop">>
+            <</replace>>
+        <</button>>
+        <br>
+        Filter by Character:
+        <<indent 0.5>>
+        <<listbox "_charReq">>
+            <<option "Any" false selected>>
+            <<optionsfrom _chars>>
+        <</listbox>>
+        <br>
+        <<button "Apply Filters">>
+            <<set _count to _gall.countWith(function (test) { return ((_charReq is false || test.chars.includes(_charReq))); })>>
+            <<removeclass "#displayArea" "hidden">>
+            <<replace "#displayArea">>
+                <center>
+                    <<if $sceneGall.unlocked and ($sceneGall.total - _count) gt 0>>
+                        Filtered out <<print $sceneGall.total - _count>> scenes. <br>
+                    <<elseif ($sceneGall.seen - _count) gt 0>>
+                        Filtered out <<print $sceneGall.seen - _count>> scenes. <br>
+                    <</if>>
+                </center>
+                <<include "gallLoop">>
+            <</replace>>
+        <</button>> </center>
+    <</if>>
+
+    <span id="displayArea" class="hidden"> </span>
+
+:: gallLoop
+    <br>
+    <<for _scene range _gall>>
+        <<capture _scene>>
+            <<if (!_charReq or _scene.chars.includes(_charReq))>>
+                <<set _mess to "<center> " + _scene.title + " </center>">>
+                <<message _mess>> <span class="message">
+                    <<indent>> _scene.desc <<indent 0.5>> <<link "Reread." _scene.passage>>
+                        <<if _scene.set>>
+                            _scene.set
+                        <</if>>
+                    <</link>> </span>
+                <</message>> <br>
+            <</if>>
+        <</capture>>
+    <</for>>

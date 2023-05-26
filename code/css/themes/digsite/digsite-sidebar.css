@@ -1,0 +1,135 @@
+html.digsite #ui-bar {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    width: 17.5em;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    transition: left 200ms ease-in;
+    background-color: #112252;
+    border-right: none;
+    box-shadow: 10px 0px 10px 5px #00000080, -10px 0px 25px #000000A0 inset;
+}
+html.digsite #ui-bar title {
+    margin-top: 0.5em;
+    background-color: #1f397c
+}
+html.digsite #ui-bar-body {
+    margin-top: 3em;
+    scrollbar-color: #1f397c transparent;
+}
+html.digsite #ui-bar.stowed {
+	left: -15.5em;
+}
+html.digsite #ui-bar-toggle {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    padding: 0.3em 0.55em 0.25em 0.45em;
+    margin-top: 0.25em;
+    box-shadow: none;
+}
+html.digsite #ui-bar-toggle:hover {
+    background-color: #15427c;
+    box-shadow: 4px 6px 8px #000000;
+}
+html.digsite #ui-bar-history [id|="history"] {
+    margin-top: 0.25em;
+    padding-top: 0.25em;
+    background-color: #10244e;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 4px 6px 8px #000000, 5px 5px 10px #ffffff25 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite #ui-bar-history [id|="history"]:hover {
+    border: none;
+    background-color: #4360a8;
+    box-shadow: none;
+    box-shadow: 4px 6px 8px #000000;
+} 
+html.digsite #ui-bar-history [id|="history"]:disabled {
+    color: #ffffff50;
+    border: none;
+    background-color: #10244e70;
+}
+html.digsite #story-title {
+    margin-top: 0.5em;
+    font-size: 125%;
+    padding-left : 0.15em;
+    padding-right : 0.15em;
+    font-family: "Copperplate Gothic";
+}
+html.digsite #story-subtitle {
+    padding : 0.15em;
+    font-family: "Ink Free";
+    font-size: 110%;
+}
+html.digsite #story-caption {
+    font-size: 95%;
+}
+html.digsite #menu ul {
+    margin: 1em 0 0;
+    padding: 0;
+    list-style: none;
+    background-color: #1f397c;
+    border: none;
+    border-radius: 25px;
+    font-family: "Copperplate Gothic";
+    overflow:hidden;
+    box-shadow: 4px 6px 8px #000000, 5px 5px 10px #ffffff15 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite #menu li {
+    border: none;
+}
+html.digsite #menu li:hover {
+    border: none;
+}
+html.digsite #menu li a {
+    border: none;
+}
+html.digsite #menu li a:hover{
+    border: none;
+}
+html.digsite #menu li:first-child {
+    border-radius: 25px 25px 0px 0px;   
+    border: none;
+}
+html.digsite #menu li:first-child:hover {
+    border: none;
+}
+html.digsite #menu li:first-child a {
+    border-radius: 25px 25px 0px 0px;
+    border: none;
+}
+html.digsite #menu li:first-child a:hover {
+    background-color: #5577cc;
+    border: none;
+    border-radius: 25px 25px 0px 0px;
+}
+html.digsite #menu li:not(:first-child) {
+    border: none;
+}
+html.digsite #menu li:not(:first-child):hover {
+    border: none;
+}
+html.digsite #menu li:not(:first-child) a{
+    border: none;
+}
+html.digsite #menu li:not(:first-child) a:hover {
+    background-color: #5577cc;
+    border: none;
+}
+html.digsite #menu li:last-child {
+    border-radius: 0px 0px 25px 25px;
+}
+html.digsite #menu li:last-child a {
+    border-radius: 0px 0px 25px 25px;
+}
+html.digsite #menu li:last-child a:hover {
+    background-color: #5577cc;
+    border-radius: 0px 0px 25px 25px;
+}

@@ -1,0 +1,138 @@
+:: widgets [widget]
+
+/* Widget for coloring words the correct color for a character (or a specified color). If no character or color is selected, will default to a dark grey. */
+<<widget "color" container>>
+    <<capture _color, _output>>
+        <<if !_args[0]>>
+            <<set _color to "color-gray">>
+        <<elseif _args[0].textColor>>
+            <<set _color to "color-" + _args[0].textColor>>
+        <<else>>
+            <<set _color to "color-" + _args[0]>>
+        <</if>>
+        <<set _output to "<span class=\"" + _color + "\"> _contents </span>">>
+        _output
+    <</capture>>
+<</widget>>
+
+/* Widget for spacing and indents. */
+<<widget "indent">>
+    <<capture _i, _loop>>
+        <<if typeof _args[0] is "number">>
+            <<set _loop to _args[0]*4>>
+        <<else>>
+            <<set _loop to 4>>
+        <</if>>
+        <<for _i to 0; _i lt _loop; _i++>>
+            &ensp;
+        <</for>>
+    <</capture>>
+<</widget>>
+
+/* Widget for turning a string (separated by ;;) into a bullet-pointed list or, with "#" as an argument, a numbered list */
+<<widget "list" container>>
+    <<capture _li, _list>>
+        <<set _list to _contents.split(";;")>>
+        <<if _args[0] is "#">>
+            <ol> <br>
+            <<for _li range _list>>
+                <li> _li </li> <br>
+            <</for>>
+            </ol>
+        <<else>>
+            <ul> <br>
+            <<for _li range _list>>
+                <li> _li </li> <br>
+            <</for>>
+            </ul>
+        <</if>>
+    <</capture>>
+<</widget>>
+
+/* Widget for making a centered in-line image, found in the ./images folder.
+Defaults to png, but can take other file types as a second argument. I'll change the default if I end up switching formats.
+Text in the container becomes the alt text if the image can't load.
+If _contents is split by ;; the second half will be a tooltip.
+*/
+<<widget "img" container>>
+    <<if settings.images>>
+        <<capture _fileType, _srcFolder, _split, _source, _img>>
+            <<set _align to "center">>
+            <<if !(_args[1] is "left" or _args[1] is "right")>>
+                <<set _fileType to _args[1]>>
+            <<elseif _args[1] is "left" or _args[1] is "right">>
+                <<if _args[2]>>
+                    <<set _fileType to _args[2]>>
+                <</if>>
+                <<set _align to _args[1]>>
+            <</if>>
+            <<if !_fileType>>
+                <<set _fileType to "png">>
+            <</if>>
+
+            <<set _split to _contents.replace(";;", "\" title=\"")>>
+
+            <<set _source to "./images/" + _args[0] + "." + _fileType>>
+            <<set _img to "<image src=\"" + _source + "\" align=\"" + _align + "\" alt=\"" + _split + "\"></image>">>
+
+            _img
+        <</capture>>
+    <</if>>
+<</widget>>
+
+/* Widget for capitalizing the first letter of a word. */
+<<widget "caps">>
+    <<print _args[0][0].toUpperCase() + _args[0].slice(1)>>
+<</widget>>
+
+/* widget for ensuring that all events are present*/
+<<widget "update">>
+    <<capture _phase, _char, _event, _a>>
+        /* Make sure the arrays for random events are set correctly */
+            <<set $events = {
+                library : {},
+                debate : {},
+                adventure : {},
+                politics : {},
+                workshop : {},
+                familiar : {},
+                summon : {}
+            }>>
+            <<include "libraryEvents">>
+            <<include "debateEvents">>
+            <<include "adventureEvents">>
+            <<include "politicsEvents">>
+            <<include "workshopEvents">>
+            <<include "familiarEvents">>
+            <<include "summonEvents">>
+            <<include "achieveInit">>
+            <<set $sceneGall.total = 0>>
+            <<set $achieveGall.total = 0>>
+            <<include "endEvents">>
+        /* This should also set the gallery and achievements totals */
+            <<for _event range $events>>
+                <<set $sceneGall.total += 1>>
+            <</for>>
+            <<set $achieves.sceneGall.completion to $sceneGall.total>>
+            <<for _a range $achieves>>
+                <<set $achieveGall.total += _a.completion>>
+            <</for>>
+        /* also also sets a variable for the current update num */
+            <<set $version to "0.1.0">>
+    <</capture>>
+<</widget>>
+
+/* widget for increasing/reducing a stat
+takes the name of the stat and the change as an input
+returns +- the number and the name of the stat*/
+<<widget stat>>
+    <<set _stat to _args[0]>>
+    <<set _mod to _args[1]>>
+    <<set _code to "<<set $pc.stats." + _stat + " += " + _mod + ">>">>
+    <<silently>> _code <</silently>>
+    <<if _args[1] gt 0>>
+        <<color "green">> ''+_mod <<caps _stat>>'' <</color>>
+    <<else>>
+        <<color "red">> ''_mod <<caps _stat>>'' <</color>>
+    <</if>>
+<</widget>>

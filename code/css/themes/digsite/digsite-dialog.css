@@ -1,0 +1,152 @@
+html.digsite #ui-dialog {
+	z-index: 100100;
+	position: fixed;
+	top: 50px;
+	margin: 0;
+	padding: 0;
+    background-color: #15427c;
+    border: none;
+    border-radius: 25px;
+    box-shadow: 4px 6px 8px #000000, 5px 5px 10px #ffffff15 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite #ui-dialog-titlebar {
+	position: relative;
+    background-color: #15427c;
+    border-radius: 25px 25px 0px 0px;
+    box-shadow: 5px 5px 10px #ffffff15 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite #ui-dialog-body {
+    background-color: #10244e;
+    border: none;
+    border-radius: 0px 0px 25px 25px;
+    overflow:hidden;
+}
+html.digsite #ui-dialog-body.restart{
+    background-color: #10244e;
+    box-shadow: 5px 0px 10px #ffffff15 inset, -5px -5px 8px #00000050 inset, 0px 5px 8px #00000050 inset;
+}
+html.digsite #ui-dialog-body.restart li {
+    background-color: transparent;
+    box-shadow:none;
+}
+html.digsite #ui-dialog-body.restart li:not(:first-child) {
+    border: none;
+}
+html.digsite #ui-dialog-body.restart li:last-child {
+    border-radius: none;
+    box-shadow:none;
+}
+html.digsite #ui-dialog-body.saves {
+    background-color: #10244e;
+    border: none;
+    border-radius: 0px 0px 25px 25px;
+    overflow:hidden;
+    box-shadow: 5px 0px 5px #ffe98515 inset, -5px -5px 8px #00000050 inset, 0px 5px 8px #00000050 inset;
+}
+html.digsite #ui-dialog-body:not(.share) li {
+    background-color: transparent;
+    box-shadow:none;
+}
+html.digsite #ui-dialog-body:not(.share) li:not(:first-child) {
+    border: none;
+}
+html.digsite #ui-dialog-body:not(.share) li:last-child {
+    border-radius: none;
+    box-shadow:none;
+}
+html.digsite #ui-dialog-body ul {
+    box-shadow: 5px 0px 10px #ffffff15 inset, -5px -5px 8px #00000050 inset;
+    border: none;
+}
+html.digsite #ui-dialog-body ul.buttons {
+    box-shadow: none;
+}
+html.digsite #ui-dialog-body li {
+    background-color: #10244e70;
+    border: none;
+    box-shadow: 0px 5px 10px #00000035 inset, 5px 0px 10px #ffffff15 inset, -5px 0px 8px #00000050 inset;
+}
+html.digsite #ui-dialog-body li:first-child {
+    border: none;
+}
+html.digsite #ui-dialog-body li:first-child:hover {
+    border: none;
+}
+html.digsite #ui-dialog-body li:first-child a {
+    border: none;
+}
+html.digsite #ui-dialog-body li:not(:first-child) {
+    border: none;
+}
+html.digsite #ui-dialog-body.list li:not(:first-child) {
+    border: none;
+}
+html.digsite #ui-dialog-body li:not(:first-child):hover {
+    border: none;
+}
+html.digsite #ui-dialog-body li:not(:first-child) a {
+    border: none;
+}
+html.digsite #ui-dialog-body li:not(:last-child) a:hover {
+    background-color: #15427c;
+    border: none;
+}
+html.digsite #ui-dialog-body li:last-child {
+    border: none;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 5px 0px 10px #ffffff15 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite #ui-dialog-body li:last-child:hover {
+    border:none;
+    border-radius: 0px 0px 25px 25px;
+    box-shadow: 5px 0px 10px #ffffff15 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite #ui-dialog-body ul.buttons li:last-child:hover {
+    box-shadow: none;
+}
+html.digsite #ui-dialog-body li:last-child a {
+    border:none;
+    border-radius: 0px 0px 25px 25px;
+}
+html.digsite #ui-dialog-body li:last-child a:hover {
+    background-color: #15427c;
+    border: none;
+    border-radius: 0px 0px 25px 25px;
+}
+html.digsite #ui-dialog-close {
+	cursor: pointer;
+	font-size: 120%;
+	margin: 0.15em;
+    margin-right: .75em;
+	padding: 0;
+    width: 3.6em;
+	height: 80%;
+	background-color: transparent;
+	border: none;
+	transition-duration: 200ms;
+    box-shadow: none
+}
+html.digsite #ui-dialog-body.settings button[id|="setting-control"] {
+    color: ghostwhite;
+    border: none;
+    box-shadow: 3px 4px 5px #000000, 5px 5px 10px #ffffff25 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite #ui-dialog-body.settings button[id|="setting-control"]:hover {
+    color: ghostwhite;
+    background-color: #5577cc;
+    border: inherit;
+}
+html.digsite #ui-dialog-body.settings button[id|="setting-control"].enabled {
+    color: ghostwhite;
+    background-color: #1f397c;
+}
+html.digsite #ui-dialog-body.settings button[id|="setting-control"].enabled:hover {
+    color: ghostwhite;
+    background-color: #5577cc;
+}
+html.digsite #notify {
+    background-color: #15427c;
+    color : ghostwhite;
+    border-radius: 15px 0px 0px 15px;
+    box-shadow: 3px 4px 5px #000000A0, 5px 5px 10px #ffffff25 inset, 0px -5px 10px #000000A0 inset;
+}

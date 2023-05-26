@@ -1,0 +1,28 @@
+sugarcube-2:
+  macros:
+    color:
+      name: color
+      container: true
+    update:
+      name: update
+    indent:
+      name: indent
+    message:
+      name: message
+      container: true
+    list:
+      name: list
+      container: true
+    more:
+      name: more
+      container: true
+    iconcheck:
+      name: iconcheck
+      container: true
+    notify:
+      name: notify
+      container: true
+    stat:
+      name: stat
+    caps:
+      name: caps

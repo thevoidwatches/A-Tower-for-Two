@@ -1,0 +1,45 @@
+html.parchment button { /* <<button>> elements */
+	cursor: pointer;
+	color: ghostwhite;
+	background-color: #351a07;
+	border: none;
+	line-height: normal;
+	padding: 0.6em;
+    margin: 0.15em;
+	transition-duration: 200ms;
+	user-select: none;
+    box-shadow: 3px 4px 5px #000000A0;
+}
+html.parchment button:hover {
+	background-color: #572e12;
+	border: none;
+}
+html.parchment button:disabled {
+    color: ghostwhite;
+    border: none;
+    background-color: slategray;
+}
+html.parchment .macro-radiobutton {
+    box-shadow: 2px 2px 3px #00000080 !important;
+}
+html.parchment input, html.parchment select, html.parchment textarea {
+	color: ghostwhite;
+	background-color: #351a07;
+	border: none;
+	padding: 0.3em;
+	margin: 0.1em;
+    box-shadow: 3px 4px 5px #000000;
+}
+html.parchment input, html.parchment select, html.parchment textarea:focus {
+	color: ghostwhite;
+	background-color: #351a07;
+	border: none;
+	padding: 0.3em;
+	margin: 0.1em;
+    box-shadow: 3px 4px 5px #000000A0;
+}
+html.parchment input:not(:disabled):focus,html.parchment  select:not(:disabled):focus,html.parchment  textarea:not(:disabled):focus,
+html.parchment input:not(:disabled):hover,html.parchment  select:not(:disabled):hover,html.parchment  textarea:not(:disabled):hover {
+	border: none;
+    box-shadow: 3px 4px 5px #000000A0;
+}

@@ -1,0 +1,286 @@
+:: StoryData
+{
+    "ifid": "F8E3E069-C22E-4073-801E-731E2CA810CD",
+    "format": "SugarCube",
+    "format-version": "2.36.1",
+    "start": "gameSetup"
+}
+
+:: StoryBanner
+    /* This can be used to display a header image, which will be adjusted according to the tag of the current passage */
+    /* Images will include a title/header for the game itself, and one for each of the main locations in the game (class types, clubs, etc) */
+    /* Will be set in ::passageReady */
+    <<if settings.images>> _headImg <</if>>
+
+:: StoryTitle
+    A Tower for Two
+
+:: StoryCaption
+    /* Warns the player to update their save if the save is from an old version. MAKE SURE TO CHANGE THIS WITH EACH UPDATE. */
+        <<if not ($version is "0.1.0")>>
+            <center> <<color "red">> This save file is running on a previous version of the game. Please update it using the update button in this sidebar before continuing. <</color>> </center>
+            <<set _updateNeeded to true>>
+    /* If no update is needed */
+        <<else>>
+            /* Shows the sideLabel if there is one. */
+            <<if $sideLabel>>
+                <center> <title> $sideLabel </title> </center>
+            <</if>>
+            <<if hasVisited("customChar-2")>>
+                <center> ''$pc.name $pc.surname'' </center>
+            <</if>>
+            /* A link to the PC's full stat page will be shown if images are on - otherwise, it'll be a link to see your full stats. */
+            <<if $pc.portrait and settings.images>>
+                $pc.portrait <br>
+            <</if>>
+            /* If you've been through character creation, your stats will be on the side. */
+            <<if hasVisited("intro-1")>>
+                <<message "//$pc.class//">>
+                    $pc.spells[2] <br>
+                    $pc.spells[0] <br>
+                    $pc.spells[1]
+                <</message>> <br>
+            <</if>>
+            <<if hasVisited("customChar-3")>>
+                Lore: $pc.stats.lore <br>
+                Wisdom: $pc.stats.wisdom <br>
+                Muscle: $pc.stats.muscle <br>
+                Charm: $pc.stats.charm <br>
+            <</if>>
+            <<if hasVisited("intro-1")>> <br>
+                ''$familiar.name'' the
+                <<if $familiar.portrait and settings.images>>
+                    $familiar.portrait
+                <</if>>
+                <<caps $familiar.shape>> <br>
+                <<set _quals to Object.keys($familiar)>>
+                <<caps _quals[2]>> | <<caps _quals[3]>>
+            <</if>>
+            <<if $debug>> <br>
+                <<include "debugControls">>
+            <</if>>
+        <</if>>
+
+:: StoryMenu
+    /* Updates the current game. Only shown if an update is needed.*/
+        <<if _updateNeeded>>
+            <<link "Update Game">>
+                /* This is a widget that sets all the event arrays for random selection, to make sure that they're all avialable. */
+                <<update>> 
+                <<set _refresh to passage()>>
+                <<goto _refresh>>
+            <</link>>
+        <<else>>
+    /* Link to the character gallery */
+            <<if !(passage() is "charGall")>>
+                <<link "Character Gallery" "charGall">>
+                    <<if !$return>>
+                        <<set $return to passage()>>
+                    <</if>>
+                    <<set $sideLabel to "Character Gallery">>
+                <</link>>
+            <</if>>
+    /* Link to the scene gallery */
+            <<if !(passage() is "sceneGall")>>
+                <<link "Scene Gallery" "sceneGall">>
+                    <<if !$return>>
+                        <<set $return to passage()>>
+                    <</if>>
+                    <<set $sideLabel to "Scene Gallery">>
+                <</link>>
+            <</if>>
+    /* Link to the achievements page, but only if you've earned any */
+            <<if !(passage() is "achieveGall" and $achieveGall.earned)>>
+                <<link "Achievements" "achieveGall">>
+                    <<if !$return>>
+                        <<set $return to passage()>>
+                    <</if>>
+                    <<set $sideLabel to "Achievements">>
+                <</link>>
+            <</if>>
+    /* Inspiration Page */
+            <<if !(passage() is "inspired")>>
+                <<link "Inspirations" "inspired">>
+                    <<if !$return>>
+                        <<set $return to passage()>>
+                    <</if>>
+                    <<set $sideLabel to "Inspirations">>
+                <</link>>
+            <</if>>
+    /* Changelog Page */
+            <<if !(passage() is "changelog")>>
+                <<link "Changelog" "changelog">>
+                    <<if !$return>>
+                        <<set $return to passage()>>
+                    <</if>>
+                    <<set $sideLabel to "Changelog">>
+                <</link>>
+            <</if>>
+        <</if>>
+
+:: StoryInit
+    /* Recalls or creates the records of the gallery, achievements, and which characters have been met. */
+        <<set $sceneGall to recall("sceneGall", { seen : 0})>>
+        <<set $achieveGall to recall("achieveGall", { earned : 0})>>
+        <<set $met to recall("met", {
+            maeve: false,
+            elena: false,
+            amelia: false,
+            zhi: false,
+            viv: false,
+            aabria: false
+        })>>
+    /* CHARACTERS */
+        <<set $pc = {
+            name : "Julia",
+            surname : "Castor",
+            class : false,
+            stats : {
+                lore : 10,
+                wisdom : 10,
+                muscle : 10,
+                charm : 10
+            },
+            portrait : false,
+            textColor : "pink"
+        }>>
+        <<set $npc = {
+            maeve : {
+                name : "Maeve",
+                suname : "O'Malley",
+                textColor : "red",
+                display : "npcs/maeve",
+                altDisplay : "",
+                met : $met.maeve,
+                req : ["($pc.lore gt 12)", "($pc.wisdom gt 12)"],
+                flags : {}
+            },
+            elena : {
+                name : "Elena",
+                suname : "Alverez",
+                textColor : "yellow",
+                display : "npcs/elena",
+                altDisplay : "",
+                met : $met.elena,
+                req : ["($pc.lore gt 12)", "($pc.muscle gt 12)"],
+                flags : {}
+            },
+            amelie : {
+                name : "Amelie",
+                suname : "Moreau",
+                textColor : "green",
+                display : "npcs/amelie",
+                altDisplay : "",
+                met : $met.amelie,
+                req : ["($pc.lore gt 12)", "($pc.charm gt 12)"],
+                flags : {}
+            },
+            zhi : {
+                name : "Huang",
+                suname : "Zhi",
+                textColor : "purple",
+                display : "npcs/zhi",
+                altDisplay : "",
+                met : $met.zhi,
+                req : ["($pc.muscle gt 12)", "($pc.wisdom gt 12)"],
+                flags : {}
+            },
+            viv : {
+                name : "Vivian",
+                suname : "Ulrich",
+                textColor : "blue",
+                display : "npcs/viv",
+                altDisplay : "",
+                met : $met.viv,
+                req : ["($pc.charm gt 12)", "($pc.wisdom gt 12)"],
+                flags : {}
+            },
+            aabria : {
+                name : "Aabria",
+                suname : "Anomnachi",
+                textColor : "silver",
+                display : "npcs/aabria",
+                altDisplay : "",
+                met : $met.aabria,
+                req : ["($pc.muscle gt 12)", "($pc.charm gt 12)"],
+                flags : {}
+            }
+        }>>
+        <<set $flags = {
+            /* this will track non-character-specific events */
+            /* multi-character event paths (triad paths and the harem ending) go here as well */
+        }>>
+    /* Sets up the time variables */
+        <<set $time = {
+            turn : 0,
+            maxTurns : 20
+        }>>
+    <<set $sideLabel to "">>
+    <<set $eventFlags to {}>>
+    <<update>>
+
+:: PassageReady
+    /* Runs the achievement test */
+        <<if $achieves>>
+            <<include "achieveTest">>
+        <</if>>
+    /* Set _header based on the current passage's tags */
+        <<if settings.images>>
+            <<if tags().includes("gameBanner")>>
+                <<set _header = {
+                    image : "banner",
+                    alt : "PLACEHOLDER BANNER"
+                }>>
+            <<elseif tags().includes("library")>>
+                <<set _header = {
+                    image : "loc/library",
+                    alt : "",
+                    toolTip : ""
+                }>>
+            <<elseif tags().includes("debate")>>
+                <<set _header = {
+                    image : "loc/debate",
+                    alt : "",
+                    toolTip : ""
+                }>>
+            <<elseif tags().includes("adventure")>>
+                <<set _header = {
+                    image : "loc/adventure",
+                    alt : "",
+                    toolTip : ""
+                }>>
+            <<elseif tags().includes("politics")>>
+                <<set _header = {
+                    image : "loc/politics",
+                    alt : "",
+                    toolTip : ""
+                }>>
+            <<elseif tags().includes("workshop")>>
+                <<set _header = {
+                    image : "loc/workshop",
+                    alt : "",
+                    toolTip : ""
+                }>>
+            <<elseif tags().includes("park")>>
+                <<set _header = {
+                    image : "loc/park",
+                    alt : "",
+                    toolTip : ""
+                }>>
+            <<elseif tags().includes("summon")>>
+                <<set _header = {
+                    image : "loc/summon",
+                    alt : "",
+                    toolTip : ""
+                }>>
+            <</if>>
+            <<if _header>>
+                <<if _header.toolTip>> <<set _header.alt to _header.alt += ";; " + _header.toolTip>> <</if>>
+                <<set _headImg to "<<img " + _header.image + ">> " + _header.alt + " <</img>>">>
+                <<if _header.onClick>>
+                    <<set _headImg to ("<<link \"" + _headImg + "\">> " + _header.onClick + " <</link>>")>>
+                <</if>>
+            <<else>>
+                <<set _headImg to "<<color 'red'>> THIS IS AN ERROR. \n PLEASE TELL THE DEVELOPER WHERE THIS ERROR OCCURED. <</color>>">>
+            <</if>>
+        <</if>>

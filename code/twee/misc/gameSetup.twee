@@ -1,0 +1,451 @@
+:: gameSetup [gameBanner]
+    /* Introduction */
+        <<indent>> Welcome to //a Tower for Two// where young wizards finish their magical schooling before heading off into the world, to establish their own wizard towers - and, often, share them with a close friend or partner! <br>
+        <br>
+        <<indent>> In this game, you'll be controlling a young wizard just entering the arcane university of TO-BE-NAMED. As you attend the university, you'll get to know a number of your classmates, and grow close to them as you help them with their issues - and, when you graduate, you'll be able to invite one of them to share a tower. <br>
+        <br>
+        <center> <<button "I'm ready to start!" "customChar-1">> <</button>> </center>
+
+:: customChar-1 [gameBanner]
+    <div id="contents">
+        <<indent>> Before anything else, you need to create your character. What's your name? <br>
+            <center>
+                <<textbox "$pc.name" $pc.name>> <<textbox "$pc.surname" $pc.surname>> <br>
+                <<button "Confirm">>
+                    <<append "#contents">> <br>
+                        <center>
+                            So your name is $pc.name $pc.surname, right? <br>
+                            <<button "No, of course not!">>
+                                <<append "#contents">> <br>
+                                <center>
+                                    Well, put your name in properly then! <br>
+                                    <<button "Okay, okay!">>
+                                    <</button>>
+                                </center>
+                                <</append>>
+                            <</button>>
+                            <<indent 0.5>>
+                            <<button "That's right!">>
+                                <<append "#contents">> <br>
+                                    <<indent>> Nice to meet you, Miss $pc.surname! What color would you like your speech to be rendered in? <br>
+                                    <center>
+                                        <<listbox "$pc.textColor" autoselect>>
+                                            <<option "Red" "red">>
+                                            <<option "Yellow" "yellow">>
+                                            <<option "Green" "green">>
+                                            <<option "Blue" "blue">>
+                                            <<option "Purple" "purple">>
+                                            <<option "Pink" "pink">>
+                                            <<option "Silver" "silver">>
+                                        <</listbox>>
+                                        <<indent 0.5>>
+                                        <<button "What will this color look like?">>
+                                            <<append "#contents">> <br>
+                                                <<indent>> <<color $pc.textColor>> Text in $pc.textColor looks like this. <</color>> When you speak, <<color $pc.textColor>> "It will look like this." <</color>>
+                                            <</append>>
+                                        <</button>>
+                                        <<indent 0.5>>
+                                        <<button "I like this color." "customChar-2">>
+                                            <<switch $pc.textColor>>
+                                                <<case "red">>
+                                                    <<set $npc.maeve.textColor to "pink">>
+                                                <<case "yellow">>
+                                                    <<set $npc.elena.textColor to "pink">>
+                                                <<case "green">>
+                                                    <<set $npc.amelie.textColor to "pink">>
+                                                <<case "blue">>
+                                                    <<set $npc.viv.textColor to "pink">>
+                                                <<case "purple">>
+                                                    <<set $npc.zhi.textColor to "pink">>
+                                                <<case "silver">>
+                                                    <<set $npc.aabria.textColor to "pink">>
+                                            <</switch>>
+                                        <</button>>
+                                    </center>
+                                <</append>>
+                            <</button>>
+                        </center>
+                    <</append>>
+                <</button>>
+            </center>
+    </div>
+
+:: customChar-2 [gameBanner]
+    <<indent>> The next step is a brief personality quiz. Don't worry, it's short! <br>
+    <center> <<button "Okay, but only if it really is short!">>
+        <<removeclass "#quiz" "hidden">>
+    <</button>> </center>
+    <span id="quiz" class="hidden"> <br>
+        <<indent>> It is, I promise! <br>
+        <br>
+        <center> 
+            <span id="q1" class="message">
+                What determines success in life? <br>
+                <<button "Who puts in the most effort.">>
+                    <<set $pc.stats.lore += 1>>
+                    <<set $pc.stats.wisdom -= 1>>
+                    <<set $pc.stats.muscle += 1>>
+                    <<set $pc.stats.charm -= 1>>
+                    <<replace "#q1">>
+                        Your success is thanks to your effort.
+                    <</replace>>
+                    <<removeclass "#q1" "message">>
+                    <<removeclass "#q2" "hidden">>
+                    <<addclass "#q2" "message">>
+                <</button>>
+                <<indent 0.5>>
+                <<button "Who has the most inherent talent.">>
+                    <<set $pc.stats.lore -= 1>>
+                    <<set $pc.stats.wisdom += 1>>
+                    <<set $pc.stats.muscle -= 1>>
+                    <<set $pc.stats.charm += 1>>
+                    <<replace "#q1">>
+                        Your success is thanks to your talent.
+                    <</replace>>
+                    <<removeclass "#q1" "message">>
+                    <<removeclass "#q2" "hidden">>
+                    <<addclass "#q2" "message">>
+                <</button>>
+                <<indent 0.5>>
+                <<button "It's all a matter of luck.">>
+                    <<set _chance to either(0,1)>>
+                    <<if _chance>>
+                        <<set $pc.stats.lore += 1>>
+                        <<set $pc.stats.wisdom -= 1>>
+                        <<set $pc.stats.muscle += 1>>
+                        <<set $pc.stats.charm -= 1>>
+                    <<else>>
+                        <<set $pc.stats.lore -= 1>>
+                        <<set $pc.stats.wisdom += 1>>
+                        <<set $pc.stats.muscle -= 1>>
+                        <<set $pc.stats.charm += 1>>
+                    <</if>>
+                    <<replace "#q1">>
+                        Your success is thanks to your luck.
+                    <</replace>>
+                    <<removeclass "#q1" "message">>
+                    <<removeclass "#q2" "hidden">>
+                    <<addclass "#q2" "message">>
+                <</button>>
+            </span>
+            <span id="q2" class="hidden"> <br>
+                How do you prefer to win your battles? <br>
+                <<button "Through overwhelming force.">>
+                    <<set $pc.stats.lore -= 1>>
+                    <<set $pc.stats.wisdom += 1>>
+                    <<set $pc.stats.muscle += 1>>
+                    <<set $pc.stats.charm -= 1>>
+                    <<replace "#q2">> <br>
+                        You win battles with your force.
+                    <</replace>>
+                    <<removeclass "#q2" "message">>
+                    <<removeclass "#q3" "hidden">>
+                    <<addclass "#q3" "message">>
+                <</button>>
+                <<indent 0.5>>
+                <<button "Through skill and cunning">>
+                    <<set $pc.stats.lore += 1>>
+                    <<set $pc.stats.wisdom -= 1>>
+                    <<set $pc.stats.muscle -= 1>>
+                    <<set $pc.stats.charm += 1>>
+                    <<replace "#q2">> <br>
+                        You win battles with your cunning.
+                    <</replace>>
+                    <<removeclass "#q2" "message">>
+                    <<removeclass "#q3" "hidden">>
+                    <<addclass "#q3" "message">>
+                <</button>>
+                <<indent 0.5>>
+                <<button "Through luck and fate.">>
+                    <<set _chance to either(0,1)>>
+                    <<if _chance>>
+                        <<set $pc.stats.lore -= 1>>
+                        <<set $pc.stats.wisdom += 1>>
+                        <<set $pc.stats.muscle += 1>>
+                        <<set $pc.stats.charm -= 1>>
+                    <<else>>
+                        <<set $pc.stats.lore += 1>>
+                        <<set $pc.stats.wisdom -= 1>>
+                        <<set $pc.stats.muscle -= 1>>
+                        <<set $pc.stats.charm += 1>>
+                    <</if>>
+                    <<replace "#q2">> <br>
+                        You win battles with your luck. 
+                    <</replace>>
+                    <<removeclass "#q2" "message">>
+                    <<removeclass "#q3" "hidden">>
+                    <<addclass "#q3" "message">>
+                <</button>>
+            </span>
+            <span id="q3" class="hidden"> <br>
+                Is it better to be a generalist or a specialist? <br>
+                <<button "Jack of all trades, \n master of none.">>
+                    <<replace "#q3">> <br>
+                        You prefer to spread your talents.
+                    <</replace>>
+                    <<removeclass "#q3" "message">>
+                    <<removeclass "#q4" "hidden">>
+                <</button>>
+                <<indent 0.5>>
+                <<button "Focusing your talents is \n the key to mastery.">>
+                    <<set _stats to Object.entries($pc.stats)>>
+                    <<for _s range _stats>>
+                        <<if _s[1] is 12>>
+                            <<set _s[1] += 3>>
+                        <<elseif _s[1] is 10>>
+                            <<set _s[1] -= 1>>
+                        <</if>>
+                    <</for>>
+                    <<set $pc.stats to Object.fromEntries(_stats)>>
+                    <<replace "#q3">> <br>
+                        You prefer to focus your talents.
+                    <</replace>>
+                    <<removeclass "#q3" "message">>
+                    <<removeclass "#q4" "hidden">>
+                <</button>>
+                <<indent 0.5>>
+                <<button "Let fate decide the \n path of your skills.">>
+                    <<set _chance to either(0,1)>>
+                    <<if _chance>>
+                        <<set _stats to Object.entries($pc.stats)>>
+                        <<for _s range _stats>>
+                            <<if _s[1] is 12>>
+                                <<set _s[1] += 3>>
+                            <<elseif _s[1] is 10>>
+                                <<set _s[1] -= 1>>
+                            <</if>>
+                        <</for>>
+                        <<set $pc.stats to Object.fromEntries(_stats)>>
+                    <</if>>
+                    <<replace "#q3">> <br>
+                        You'll take your talents whichever direction feels natural.
+                    <</replace>>
+                    <<removeclass "#q3" "message">>
+                    <<removeclass "#q4" "hidden">>
+                <</button>>
+            </span>
+        </center>
+        <span id="q4" class="hidden"> <br>
+            <<indent>> Those three questions determined your starting statistics, but they don't control your destiny - your specialty as a wizard is still up to you. Next up, you'll pick your specialty and choose a familiar! <br>
+            <center> <<button "I'm ready!" "customChar-3">> <</button>> </center>
+        </span>
+    </span>
+
+:: customChar-3 [gameBanner]
+    <<indent>> Your specialty as a wizard is up to you, but success requires you to focus on your strengths - or at least avoid your weaknesses. There are 12 possible specialties, each fitting a specific stat as the highest and another as the lowest, but you'll be choosing from five - the one that matches both your highest stat and your lowest stat, the other two classes that match your highest stat, and the other two class that match your lowest stat. <br>
+
+    <<indent>> Specialties don't change your stats - however, each specialty has access to a unique Spell that only devotees of that specialty can use. Along with the Spell you get from your specialty, you'll also have a unique Spell corresponding to your high stat and one corresponding to your low stat. Many events will have a special option available to characters with an appopropriate spell - and some special events won't even appear unless you have the right spell! <br>
+
+    <center> <<button "Got it. Let me choose my specialty!">>
+        <<removeclass "#class" "hidden">>
+    <</button>> </center>
+    
+    <<set _hStat to "">>
+    <<set _hVal to 0>>
+    <<set _lStat to "">>
+    <<set _lVal to 20>>
+    <<for _stat range Object.entries($pc.stats)>>
+        <<if _stat[1] gt _hVal>>
+            <<set _hStat to _stat[0]>>
+            <<set _hVal to _stat[1]>>
+        <<elseif _stat[1] lt _lVal>>
+            <<set _lStat to _stat[0]>>
+            <<set _lVal to _stat[1]>>
+        <</if>>
+    <</for>>
+
+    <div id="class" class="hidden"> <br>
+        <<indent>> Your high <<caps _hStat>> and low <<caps _lStat>> give you a lean towards being
+        <<switch _hStat>>
+            <<case "lore">>
+                <<set _classChoice to ["Occultist", "Magus", "Scholar"]>>
+                <<set $pc.spells to ["Inspiration"]>>
+                <<switch _lStat>>
+                    <<case "wisdom">>
+                        <<run _classChoice.push("Mystic Brawler", "Warlock")>>
+                        <<run $pc.spells.push("Telepathy")>>
+                        <<set $pc.class to "Occultist">>
+                        an ''occultist'' - someone who seeks out hidden knowledge and impossible truths. However, you could also be a ''magus,'' focusing on mastery of fundamental magics, a ''scholar,'' helping others learn, a ''mystic brawler,'' using your magic to enhance your physical strength, or a ''warlock,'' making pacts and bargains with occult spirits.
+                    <<case "muscle">>
+                        <<run _classChoice.push("Witch", "Bard")>>
+                        <<run $pc.spells.push("Enchant Item")>>
+                        <<set $pc.class to "Scholar">>
+                        a ''scholar'' - someone who spends their life helping others learn and understand the world. However, you could also be an ''occultist,'' seeking out impossible knowledge, a ''magus,'' focusing on mastery of fundamental magics, a ''witch,'' specializing in potions, or a ''bard,'' channeling magic into music.
+                    <<case "charm">>
+                        <<run _classChoice.push("Sage", "Battlemage")>>
+                        <<run $pc.spells.push("Invisibility")>>
+                        <<set $pc.class to "Magus">>
+                        a ''magus'' - someone who focuses on mastery of magic at its most fundamental level. However, you could also be an ''occultist,'' seeking out impossible knowledge, a ''scholar,'' helping others learn, a ''sage,'' divining the future and guiding others, or a ''battlemage,'' commanding the elements themselves.
+                <</switch>>
+            <<case "wisdom">>
+                <<set _classChoice to ["Druid", "Witch", "Sage"]>>
+                <<set $pc.spells to ["Foresight"]>>
+                <<switch _lStat>>
+                    <<case "lore">>
+                        <<run _classChoice.push("Spellsword", "Sorcerer")>>
+                        <<run $pc.spells.push("Rewrite Memory")>>
+                        <<set $pc.class to "Druid">>
+                        a ''druid'' - someone who works with the magics of the natural world. However, you could also be a ''witch,'' specializing in potions, a ''sage,'' divining the future and guiding others, a ''spellsword,'' fueling your skills with enhancement magic, or a ''sorcerer,'' twisting simple spells to incredible results.
+                    <<case "muscle">>
+                        <<run _classChoice.push("Scholar", "Bard")>>
+                        <<run $pc.spells.push("Enchant Item")>>
+                        <<set $pc.class to "Witch">>
+                        a ''witch'' - someone who specializes in creating potions of all types. However, you could also be a ''druid,'' using the magics of the natural world, a ''sage,'' divining the future and guiding others,  a ''scholar,'' helping others learn, or a ''bard,'' channeling magic into music.
+                    <<case "charm">>
+                        <<run _classChoice.push("Magus", "Battlemage")>>
+                        <<run $pc.spells.push("Invisibility")>>
+                        <<set $pc.class to "Sage">>
+                        a ''sage'' - someone who divines the future and guides those around them. However, you could also be a ''druid,'' using the magics of the natural world, a ''witch,'' specializing in potions, a ''magus,'' focusing on mastery of fundamental magics, or a ''battlemage,'' commanding the elements themselves.
+                <</switch>>
+            <<case "muscle">>
+                <<set _classChoice to ["Spellsword", "Mystic Brawler", "Battlemage"]>>
+                <<set $pc.spells to ["Mountain's Strength"]>>
+                <<switch _lStat>>
+                    <<case "lore">>
+                        <<run _classChoice.push("Druid", "Sorcerer")>>
+                        <<run $pc.spells.push("Rewrite Memory")>>
+                        <<set $pc.class to "Spellsword">>
+                        a ''spellsword'' - someone who fuels their skills with enhancement magic. However, you could also be a ''mystic brawler,'' using your magic to enhance your physical strength, a ''battlemage,'' commanding the elements themselves, a ''druid,'' using the magics of the natural world, or a ''sorcerer,'' twisting simple spells to incredible results.
+                    <<case "wisdom">>
+                        <<run _classChoice.push("Occultist", "Warlock")>>
+                        <<run $pc.spells.push("Telepathy")>>
+                        <<set $pc.class to "Mystic Brawler">>
+                        a ''mystic brawler'' - someone who uses their magic to vastly increase their physical abilities. However, you could also be a ''spellsword,'' fueling your skills with enhancement magic, a ''battlemage,'' commanding the elements themselves, an ''occultist,'' seeking out impossible knowledge, or a ''warlock,'' making pacts and bargains with occult spirits.
+                    <<case "charm">>
+                        <<run _classChoice.push("Magus", "Sage")>>
+                        <<run $pc.spells.push("Invisibility")>>
+                        <<set $pc.class to "Battlemage">>
+                        a ''battlemage'' - someone who commands the elements both to attack and to protect. However, you could also e a ''spellsword,'' fueling your skills with enhancement magic, a ''mystic brawler,'' using your magic to enhance your physical strength, a ''magus,'' focusing on mastery of fundamental magics, or a ''sage,'' divining the future and helping others.
+                <</switch>>
+            <<case "charm">>
+                <<set _classChoice to ["Sorcerer", "Warlock", "Bard"]>>
+                <<set $pc.spells to ["Glibness"]>>
+                <<switch _lStat>>
+                    <<case "lore">>
+                        <<run _classChoice.push("Druid", "Spellsword")>>
+                        <<run $pc.spells.push("Rewrite Memory")>>
+                        <<set $pc.class to "Sorcerer">>
+                        a ''sorcerer'' - someone who uses their instinctive command of magic to get incredible results from simple spells. However, you could also be a ''warlock,'' making pacts and bargains with occult spirits, a ''bard,'' channeling magic into music, a ''druid,'' using the magics of the natural world, or a ''spellsword,'' fueling your skills with enhancement magic.
+                    <<case "wisdom">>
+                        <<run _classChoice.push("Occultist", "Mystic Brawler")>>
+                        <<run $pc.spells.push("Telepathy")>>
+                        <<set $pc.class to "Warlock">>
+                        a ''warlock'' - someone who specialies in making deals and bargains with spirits for power. However, you could also be a sorcerer, twisting simple spells to incredible results, a ''bard,'' channeling magic into music, an ''occultist,'' seeking out impossible knowledge, or a ''mystic brawler,'' using your magic to enhance your physical strength.
+                    <<case "muscle">>
+                        <<run _classChoice.push("Scholar", "Witch")>>
+                        <<run $pc.spells.push("Enchant Item")>>
+                        <<set $pc.class to "Bard">>
+                        a ''bard'' - someone who channels magic into art and music to powerful, but temporary, effect. However, you could also be a sorcerer, twisting simple spells to incredible results, a ''warlock,'' making pacts and bargains with occult spirits, a ''scholar,'' helping others learn, or a ''witch,'' specializing in potions.
+                <</switch>>
+        <</switch>>
+        <<run _classChoice.sort()>>
+        <br>
+
+        <center> <span class="message">
+        <<listbox "$pc.class" autoselect>>
+            <<optionsfrom _classChoice>>
+        <</listbox>>
+        <<indent 0.5>>
+        <<button "I've made my choice.">>
+            <<switch $pc.class>>
+                <<case "Occultist">>
+                    <<run $pc.spells.push("See the Unseen")>>
+                <<case "Magus">>
+                    <<run $pc.spells.push("Counterspell")>>
+                <<case "Scholar">>
+                    <<run $pc.spells.push("Dowsing")>>
+                <<case "Druid">>
+                    <<run $pc.spells.push("Animal Form")>>
+                <<case "Witch">>
+                    <<run $pc.spells.push("Brew Potion")>>
+                <<case "Sage">>
+                    <<run $pc.spells.push("Guidance")>>
+                <<case "Spellsword">>
+                    <<run $pc.spells.push("Channel Energy")>>
+                <<case "Mystic Brawler">>
+                    <<run $pc.spells.push("Berserk")>>
+                <<case "Battlemage">>
+                    <<run $pc.spells.push("Elemental Aura")>>
+                <<case "Sorcerer">>
+                    <<run $pc.spells.push("Overcharge")>>
+                <<case "Warlock">>
+                    <<run $pc.spells.push("Eternal Vow")>>
+                <<case "Bard">>
+                    <<run $pc.spells.push("Song of Songs")>>
+            <</switch>>
+            <<replace "#class">> <br>
+                <center> You are <<if $pc.class is "Occultist">> an <<else>> a <</if>> ''<<print $pc.class.toLowerCase()>>,'' which gives you access to the Spell ''$pc.spells[2].'' <br>
+                Your high <<caps _hStat>> means you know the Spell ''$pc.spells[0],'' and your low <<caps _lStat>> gives you the Spell ''$pc.spells[1].'' </center>
+            <</replace>>
+            <<removeclass "#class" "message">>
+            <<removeclass "#familiar" "hidden">>
+        <</button>> </span>
+        </center>
+    </div>
+
+    <div id="familiar" class="hidden"> <br>
+        <<indent>> Just one quick choice left - after all, every wizard needs a familiar! Similar to Spells, your familiar gives you additional options in some events - each kind of familiar has two special qualities that give access to those options. Each of those special qualities is shared with just one other familiar - all the others lack that special quality! <br>
+        <span class="message"> <center>
+            Your familiar's name is <<textbox "_fName" "">> <br>
+            She is a <<listbox "_familiar">>
+                <<option "cat">>
+                <<option "crow">>
+                <<option "dog">>
+                <<option "owl">>
+                <<option "rat">>
+                <<option "snake">>
+            <</listbox>>
+            <<indent 0.5>>
+            <<button "I've made my choice.">>
+                <<if _fName>>
+                    <<set $familiar = {
+                        name : _fName,
+                        shape : _familiar, 
+                    }>>
+                    <<switch _familiar>>
+                        <<case "cat">>
+                            <<set $familiar.dangerous to true>>
+                            <<set $familiar.perceptive to true>>
+                        <<case "crow">>
+                            <<set $familiar.flying to true>>
+                            <<set $familiar.playful to true>>
+                        <<case "dog">>
+                            <<set $familiar.playful to true>>
+                            <<set $familiar.tracking to true>>
+                        <<case "owl">>
+                            <<set $familiar.perceptive to true>>
+                            <<set $familiar.flying to true>>
+                        <<case "rat">>
+                            <<set $familiar.tracking to true>>
+                            <<set $familiar.small to true>>
+                        <<case "snake">>
+                            <<set $familiar.dangerous to true>>
+                            <<set $familiar.small to true>>
+                    <</switch>>
+                    <<removeclass "#familiar" "message">>
+                    <<replace "#familiar">>
+                        <center>
+                            Your familiar is $familiar.name, a $familiar.shape. 
+                            <<set _quals to Object.keys($familiar)>>
+                            ''<<caps _quals[2]>>'' and ''<<caps _quals[3]>>'' are her special qualities.
+                        </center>
+                        <br>
+                        <<indent>>...and that's it, you're done! See, I told you it wouldn't take long.
+                        <center> <<button "Eh. It could have been shorter.">>
+                        <</button>> </center> <br>
+                        <<indent>> Look, why don't you just [[get to the actual game?|intro]]
+                    <</replace>>
+                <<else>>
+                    <<append "#familiar">> <br>
+                        <center> Make sure to give your _familiar a name! </center>
+                    <</append>>
+                <</if>>
+            <</button>>
+        </center> </span>
+    </div>
+
+:: intro [gameBanner]
+    ''OUTLINE'' <br>
+    Brief introduction to the world <br>
+    tease for the characters who haven't been met yet, introduction to the ones who have <br>
+    pass to the main game

@@ -1,0 +1,86 @@
+:: changelog [gameBanner]
+    /* This will include the changelog of the most recent version, and previous versions in messsages. */
+
+    <center> <title> <<back [[Return|$return]]>>  </title> </center>
+        <br>
+    <center> <title>
+        0.1.0 ''Introduction'' </title> </center>
+        <span  class="message"> 
+            <center> First release! </center>
+            <br>
+            <<indent>> This release includes TO BE WRITTEN. <br>
+            <br>
+            <<indent>> For Patrons: an Achievement (automatically earned in the Patreon version of the game), a toggle in the Event Gallery to temporarily unlock all events, and Endless Mode. <<if !$patreon>> If you'd like to see this content, please consider [[supporting the author.|http://patreon.com]] <<else>> Thank you for your support! <</if>> <br>
+            <br>
+            <<indent>> This version includes approximately WORDS words of content across SCENES events. There are currently no patron-exclusive events. <br>
+            <br>
+            <<message "<center> Detailed Changelog </center>">>
+                <span class="message">
+                <<list>>
+                    test ;;
+                    next ;;
+                    test
+                <</list>>
+                </span>
+            <</message>>
+            </span>
+            <br>
+        /* <<message "<center> Previous Versions </center>" btn>> <span class="message">
+            /* CHANGELOG SPEC
+                <<message "<center> VERSION NUMBER </center>" btn>> <span class="message">
+                    <<indent>> SUMMARY OF CONTENT <br>
+                    <br>
+                    <<indent>> PATRON-REWARDS <br>
+                    <br>
+                    <<indent>> This version adds approximately WORDS words of content for a total of WORDS words, and SCENES sex scenes for a total of SCENES (making up WORDS words of content). This count includes SCENES patron-exclusive scenes, making up WORDS words of patron-exclusive content. <br>
+                    <br>
+                    <<message "<center> Full Changelog </center>">> <span class="message">
+                        <<list>>
+                            test ;;
+                            next ;;
+                            test
+                        <</list>>
+                    </span> <</message>>
+                </span> <</message>>
+        </span> <</message>>
+        <br>
+    <center>
+        <title> <<return "Return">> </title>
+    </center> */
+
+:: inspired [gameBanner]
+    <center>
+        <title> <<back [[Return|$return]]>> </title>
+    </center>
+    <br>
+    <<indent>> No work of art exists in a vacuum - all things have their influences. Although it would be impossible to identify everything which influenced me in the writing of this game, I do want to pay tribute to those which I am aware of, as well as to those I paid conscious tribute to. <br>
+    
+    <<indent>> Most directly, those works are
+    <<link "Cultist Simulator">>
+        <<removeclass "#displayArea" "hidden">>
+        <<replace "#displayArea">>
+            TO BE WRITTEN
+        <</replace>>
+    <</link>>
+    and
+    <<link "Monster Prom.">>
+        <<removeclass "#displayArea" "hidden">>
+        <<replace "#displayArea">>
+            <<indent>> I owe a great deal of thanks to [[Beautiful Glitch,|http://monsterprom.pizza/press/index.php]] the developers of //Monster Prom, Monster Camp,// and //Monster Road Trip.// The mechanics of those games were a major inspiration to me while planning out //College of Addiction// - specifically, in regards to the core gameplay loop (which, as with the //Monster Prom// series, is an abstraction of a period of time, with semi-randomly selected events which offer multiple outcomes depending on your choices and stats), as well as the concept of <<more "This is planned, but not yet implemented.">>random events being unlocked through earning specific endings or seeing other events first.<</more>> <br>
+            <center> <<link "Hide details.">> <<addclass "$displayArea" "hidden">> <</link>> </center>
+        <</replace>>
+    <</link>>
+    See details on how each of these works influenced me by clicking their names.
+    <br>
+
+    <div id="displayArea" class="message hidden"> </div>
+
+:: debugControls
+    <<button "Clear Metadata">>
+        <<run forget("sceneGall")>>
+        <<run forget("achieveGall")>>
+        <<run forget("met")>>
+    <</button>> <br>
+    <<button "Update Events">>
+        <<update>>
+    <</button>> <br>

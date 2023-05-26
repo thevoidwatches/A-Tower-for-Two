@@ -1,0 +1,96 @@
+html.parchment #ui-bar {
+    position: fixed;
+    z-index: 50;
+    top: 0;
+    left: 0;
+    width: 17.5em;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    transition: left 200ms ease-in;
+    color: #250000;
+    background-color: tan;
+    border-right: none;
+    box-shadow: 0px 0px 10px 5px #000000;
+}
+html.parchment #ui-bar-body {
+    margin-top: 3em;
+    scrollbar-color: #351a07 transparent;
+}
+html.parchment #ui-bar.stowed {
+	left: -15.5em;
+}
+html.parchment #ui-bar-toggle {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    color: #351a07;
+    padding: 0.3em 0.55em 0.25em 0.45em;
+    margin-top: 0.25em;
+    box-shadow: none;
+    border-radius: 50%;
+}
+html.parchment #ui-bar-toggle:hover {
+    color: ghostwhite;
+    background-color: #351a07;
+    border-radius: 50%;
+    box-shadow: 2px 2px 5px #000000;
+}
+html.parchment #ui-bar-history [id|="history"] {
+    padding-top: 0.25em;
+    margin-bottom: 0.25em;
+    background-color: #351a07;
+    border: none;
+    border-radius: 0px;
+    box-shadow: 2px 2px 5px #000000;
+}
+html.parchment #ui-bar-history [id|="history"]:hover {
+    border: none;
+    background-color: #572e12;
+} 
+html.parchment #ui-bar-history [id|="history"]:disabled {
+    color: ghostwhite;
+    border: none;
+    background-color: slategray;
+}
+html.parchment #story-title {
+    margin-top: 0.5em;
+    font-size: 125%;
+    padding-left : 0.15em;
+    padding-right : 0.15em;
+}
+html.parchment #story-subtitle {
+    padding : 0.15em;
+    font-size: 115%;
+}
+html.parchment #menu ul {
+    margin: 1em 0 0;
+    padding: 0;
+    list-style: none;
+    background-color: #351a07;
+    border: none;
+    overflow:hidden;
+    box-shadow: 5px 5px 10px #000000;
+}
+html.parchment #menu li:not(:first-child) {
+    border: none;
+}
+html.parchment #menu li {
+    background-color: #351a07;
+    border: none;
+}
+html.parchment #menu li:hover {
+    background-color: #572e12;
+    border: none;
+}
+html.parchment #menu li a {
+    background-color: #351a07;
+    border: none;
+}
+html.parchment 
+#menu li a:hover {
+    background-color: #572e12;
+    border: none;
+}

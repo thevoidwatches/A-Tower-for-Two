@@ -1,0 +1,54 @@
+html.digsite button { /* <<button>> elements */
+	cursor: pointer;
+	color: #fffbf0;
+	background-color: #1f397c;
+	border: none;
+    border-radius: 25px;
+	line-height: normal;
+	padding: 0.6em;
+    margin: 0.15em;
+	transition-duration: 200ms;
+	user-select: none;
+    font-family: "Copperplate Gothic";
+    box-shadow: 3px 4px 5px #000000, 5px 5px 10px #ffffff25 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite button:hover {
+	background-color: #5577cc;
+    box-shadow: 3px 4px 5px #000000;
+	border: none;
+}
+html.digsite button:disabled {
+    border: none;
+    background-color: #10244e70;
+}
+html.digsite input, html.digsite select, html.digsite textarea {
+	color: #fffbf0;
+	background-color: #000a1f;
+	border: none;
+	padding: 0.3em;
+	margin: 0.1em;
+    border-radius: 10px;
+    box-shadow: 2px 3px 4px #00000050, 5px 5px 10px #ffffff25 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite input, html.digsite select, html.digsite textarea:focus {
+	color: #fffbf0;
+	background-color: #10244e70;
+	border: none;
+	padding: 0.3em;
+	margin: 0.1em;
+    border-radius: 10px;
+    box-shadow: 2px 3px 4px #00000050, 5px 5px 10px #ffffff25 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite input:not(:disabled):focus, html.digsite select:not(:disabled):focus, html.digsite textarea:not(:disabled):focus,
+html.digsite input:not(:disabled):hover, html.digsite select:not(:disabled):hover, html.digsite textarea:not(:disabled):hover {
+	background-color: #000a1f;
+	border: none;
+    border-radius: 10px;
+    box-shadow: 2px 3px 4px #00000050, 5px 5px 10px #ffffff25 inset, -5px -5px 8px #00000050 inset;
+}
+html.digsite select:not(:disabled):focus {
+    background-color: #000a1f;
+	border: none;
+    border-radius: 10px 10px 0px 0px;
+    box-shadow: 2px 3px 4px #00000050, 5px 5px 10px #ffffff25 inset, -5px -5px 8px #00000050 inset;
+}
